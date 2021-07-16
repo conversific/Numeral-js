@@ -1468,18 +1468,19 @@
         if (currency) {
             currency = currency.toUpperCase();
             var localeKey = config.defaultLocales[currency];
+            var locale = config.locales[localeKey];
+            if (typeof locale.h !== 'undefined') {
+                localeKey = locale.h;
+                locale = config.locales[locale.h];
+            }
             if (!locales[localeKey]) {
                 return 'en';
             }
-            var locale = config.locales[localeKey];
             options.currentLocale = localeKey;
-            if (typeof locale.h !== 'undefined') {
-                locale = config.locales[locale.h];
-            }
             locales[localeKey]['currency']['symbol'] = config.symbols[currency] || currency;
-            locales[localeKey]['currency']['pattern'] = config.locales[locale].p;
-            locales[localeKey]['delimiters']['thousands'] = config.locales[locale].g;
-            locales[localeKey]['delimiters']['decimal'] = config.locales[locale].d;
+            locales[localeKey]['currency']['pattern'] = locale.p;
+            locales[localeKey]['delimiters']['thousands'] = locale.g;
+            locales[localeKey]['delimiters']['decimal'] = locale.d;
         }
 
         return options.currentLocale;
