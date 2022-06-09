@@ -1474,7 +1474,7 @@
                 locale = config.locales[locale.h];
             }
             if (!locales[localeKey]) {
-                return 'en';
+                localeKey = 'en';
             }
             options.currentLocale = localeKey;
             locales[localeKey]['currency']['symbol'] = config.symbols[currency] || currency;
